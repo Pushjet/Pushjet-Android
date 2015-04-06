@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <LinearLayout android:id="@+id/service_icon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
+
+        <ImageView
+            android:id="@+id/service_icon_image"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:contentDescription="@string/service_icon" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/service_token"
+        android:layout_width="fill_parent"
+        android:layout_height="26dip"
+        android:layout_toRightOf="@id/service_icon_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/generic_placeholder"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/service_token"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/service_icon_layout"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="@string/generic_placeholder"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:id="@+id/service_name" />
+
+</RelativeLayout>

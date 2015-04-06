@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Use the custom server? -->
+    <CheckBoxPreference
+        android:key="server_use_custom"
+        android:title="@string/perf_server_use_custom"
+        android:summary="@string/pref_server_use_custom_summary"
+        android:defaultValue="false" />
+
+    <EditTextPreference
+        android:dependency="server_use_custom"
+        android:key="server_custom_url"
+        android:title="@string/pref_server_custom_url"
+        android:defaultValue="https://api.pushjet.io"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="textUri"/>
+
+    <EditTextPreference
+        android:dependency="server_use_custom"
+        android:key="server_custom_sender_id"
+        android:title="@string/pref_server_custom_sender_id"
+        android:defaultValue="509878466986"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:inputType="number"/>
+
+    <Preference
+        android:key="server_register"
+        android:title="@string/pref_server_register"
+        android:summary="@string/pref_server_register_summary" />
+
+</PreferenceScreen>

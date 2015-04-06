@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pushjet</string>
+    <string name="action_subscriptions">Subscriptions</string>
+    <string name="title_activity_subscriptions">Subscriptions</string>
+    <string name="action_new">New</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_copy_token">Copy token</string>
+    <string name="action_clear_notifications">Remove all notifications</string>
+    <string name="generic_placeholder">Placeholder</string>
+    <string name="service_icon">Service icon</string>
+    <string name="action_show_qr">Display QR code</string>
+    <string name="qr_code">QR code</string>
+    <string name="action_share">Share</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_header_server">Custom Server</string>
+    <string name="pref_header_general">General Settings</string>
+    <string name="perf_server_use_custom">Use custom server</string>
+    <string name="pref_server_custom_url">Server URL</string>
+    <string name="pref_server_custom_sender_id">Custom Sender ID</string>
+    <string name="pref_general_reset">Delete all notifications</string>
+    <string name="pref_server_register">Re-register with server</string>
+    <string name="pref_server_use_custom_summary">Advanced; for if you don\'t trust our server and/or you want to host it yourself</string>
+    <string name="pref_server_register_summary">You\'ll need to re-register if you change your server settings or if messages are not arriving. WARNING: This will delete all your received notifications!</string>
+
+
+    <string name="pushjet_announce_service">046d-71edff-198c7108954c-7f8c9-c0943b03f</string>
+    <string name="pushjet_welcome_title">Welcome to pushjet!</string>
+    <string name="pushjet_welcome_message">Tap me to expand! Welcome to Pushjet. To start using pushjet you\'ll need to add a service.</string>
+</resources>

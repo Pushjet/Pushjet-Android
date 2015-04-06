@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_delete"
+        android:title="@string/action_delete" />
+    <item android:id="@+id/action_copy_token"
+        android:title="@string/action_copy_token" />
+    <item android:id="@+id/action_clear_notifications"
+        android:title="@string/action_clear_notifications" />
+    <item android:id="@+id/action_show_qr"
+        android:title="@string/action_show_qr" />
+    <item android:id="@+id/action_share"
+        android:title="@string/action_share" />
+</menu>
