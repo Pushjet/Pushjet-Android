@@ -191,9 +191,9 @@ public class SubscriptionsActivity extends ListActivity {
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (i == 0)
-                                    IntentIntegrator.initiateScan(thisActivity, IntentIntegrator.QR_CODE_TYPES);
-                                if (i == 1) {
+                                if (i == 0) {
+                                    new IntentIntegrator(thisActivity).initiateScan(IntentIntegrator.QR_CODE_TYPES);
+                                } if (i == 1) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(thisActivity);
                                     builder.setTitle("Public token");
                                     final EditText input = new EditText(thisActivity);

@@ -32,5 +32,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.0.0'
     compile 'com.google.zxing:core:2.2'
     compile 'com.journeyapps:zxing-android-embedded:2.3.0@aar'
+    compile 'com.journeyapps:zxing-android-integration:2.3.0@aar'
     compile 'com.android.support:support-v4:22.0.0'
 }
