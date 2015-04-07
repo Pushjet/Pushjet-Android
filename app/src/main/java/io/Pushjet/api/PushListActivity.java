@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 import android.app.ListActivity;
 import android.content.BroadcastReceiver;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,18 +16,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import net.Azise.pushjet.Async.FirstLaunchAsync;
-import net.Azise.pushjet.Async.GCMRegistrar;
-import net.Azise.pushjet.Async.ReceivePushAsync;
-import net.Azise.pushjet.Async.ReceivePushCallback;
-import net.Azise.pushjet.PushjetApi.PushjetApi;
-import net.Azise.pushjet.PushjetApi.PushjetException;
-import net.Azise.pushjet.PushjetApi.PushjetMessage;
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.Async.FirstLaunchAsync;
+import io.Pushjet.api.Async.GCMRegistrar;
+import io.Pushjet.api.Async.ReceivePushAsync;
+import io.Pushjet.api.Async.ReceivePushCallback;
+import io.Pushjet.api.PushjetApi.PushjetApi;
+import io.Pushjet.api.PushjetApi.PushjetMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class PushListActivity extends ListActivity {
     private PushjetApi api;

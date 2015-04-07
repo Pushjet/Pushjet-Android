@@ -1,12 +1,12 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import net.Azise.pushjet.MiscUtil;
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.MiscUtil;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;

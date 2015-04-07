@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -15,9 +15,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import net.Azise.pushjet.Async.GCMRegistrar;
-import net.Azise.pushjet.Async.RefreshServiceAsync;
-import net.Azise.pushjet.PushjetApi.PushjetApi;
+import io.Pushjet.api.Async.GCMRegistrar;
+import io.Pushjet.api.Async.RefreshServiceAsync;
+import io.Pushjet.api.PushjetApi.PushjetApi;
 
 import java.util.List;
 

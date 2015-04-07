@@ -1,8 +1,8 @@
-package net.Azise.pushjet.PushjetApi;
+package io.Pushjet.api.PushjetApi;
 
 import android.content.Context;
 
-import net.Azise.pushjet.HttpUtil;
+import io.Pushjet.api.HttpUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;

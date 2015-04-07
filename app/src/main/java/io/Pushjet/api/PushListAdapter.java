@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import net.Azise.pushjet.PushjetApi.PushjetMessage;
+import io.Pushjet.api.PushjetApi.PushjetMessage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

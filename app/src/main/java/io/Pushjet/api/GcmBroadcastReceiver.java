@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 import android.app.Activity;
 import android.content.ComponentName;

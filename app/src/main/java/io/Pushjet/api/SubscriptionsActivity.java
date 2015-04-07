@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,15 +30,15 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import net.Azise.pushjet.Async.AddServiceAsync;
-import net.Azise.pushjet.Async.DeleteServiceAsync;
-import net.Azise.pushjet.Async.GenericAsyncCallback;
-import net.Azise.pushjet.Async.RefreshServiceAsync;
-import net.Azise.pushjet.Async.RefreshServiceCallback;
-import net.Azise.pushjet.PushjetApi.PushjetApi;
-import net.Azise.pushjet.PushjetApi.PushjetException;
-import net.Azise.pushjet.PushjetApi.PushjetService;
-import net.Azise.pushjet.PushjetApi.PushjetUri;
+import io.Pushjet.api.Async.AddServiceAsync;
+import io.Pushjet.api.Async.DeleteServiceAsync;
+import io.Pushjet.api.Async.GenericAsyncCallback;
+import io.Pushjet.api.Async.RefreshServiceAsync;
+import io.Pushjet.api.Async.RefreshServiceCallback;
+import io.Pushjet.api.PushjetApi.PushjetApi;
+import io.Pushjet.api.PushjetApi.PushjetException;
+import io.Pushjet.api.PushjetApi.PushjetService;
+import io.Pushjet.api.PushjetApi.PushjetUri;
 
 import java.util.ArrayList;
 import java.util.Arrays;

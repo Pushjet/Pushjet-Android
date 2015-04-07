@@ -1,4 +1,4 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
 
 import android.content.Context;
@@ -14,9 +14,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import net.Azise.pushjet.HttpUtil;
-import net.Azise.pushjet.PushjetApi.DeviceUuidFactory;
-import net.Azise.pushjet.SettingsActivity;
+import io.Pushjet.api.HttpUtil;
+import io.Pushjet.api.PushjetApi.DeviceUuidFactory;
+import io.Pushjet.api.SettingsActivity;
 
 import java.io.IOException;
 import java.util.HashMap;

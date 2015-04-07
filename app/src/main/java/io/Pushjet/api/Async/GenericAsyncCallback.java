@@ -1,4 +1,4 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
 
 public interface GenericAsyncCallback {

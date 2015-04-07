@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 
 import android.annotation.TargetApi;
@@ -18,8 +18,8 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import net.Azise.pushjet.PushjetApi.PushjetMessage;
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.PushjetApi.PushjetMessage;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 import org.json.JSONException;
 import org.json.JSONObject;

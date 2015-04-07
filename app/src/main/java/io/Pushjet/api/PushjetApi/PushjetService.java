@@ -1,11 +1,11 @@
-package net.Azise.pushjet.PushjetApi;
+package io.Pushjet.api.PushjetApi;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import net.Azise.pushjet.MiscUtil;
-import net.Azise.pushjet.R;
+import io.Pushjet.api.MiscUtil;
+import io.Pushjet.api.R;
 
 import java.io.FileInputStream;
 import java.io.IOException;

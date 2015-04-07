@@ -1,4 +1,4 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,13 +6,13 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import net.Azise.pushjet.DatabaseHandler;
-import net.Azise.pushjet.PushjetApi.PushjetApi;
-import net.Azise.pushjet.PushjetApi.PushjetException;
-import net.Azise.pushjet.PushjetApi.PushjetMessage;
-import net.Azise.pushjet.PushjetApi.PushjetService;
-import net.Azise.pushjet.R;
-import net.Azise.pushjet.SettingsActivity;
+import io.Pushjet.api.DatabaseHandler;
+import io.Pushjet.api.PushjetApi.PushjetApi;
+import io.Pushjet.api.PushjetApi.PushjetException;
+import io.Pushjet.api.PushjetApi.PushjetMessage;
+import io.Pushjet.api.PushjetApi.PushjetService;
+import io.Pushjet.api.R;
+import io.Pushjet.api.SettingsActivity;
 
 import java.util.Date;
 

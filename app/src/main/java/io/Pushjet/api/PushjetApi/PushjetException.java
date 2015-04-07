@@ -1,4 +1,4 @@
-package net.Azise.pushjet.PushjetApi;
+package io.Pushjet.api.PushjetApi;
 
 public class PushjetException extends Exception {
     public int code;

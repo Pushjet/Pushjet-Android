@@ -1,12 +1,11 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
 import android.os.AsyncTask;
 
-import net.Azise.pushjet.DatabaseHandler;
-import net.Azise.pushjet.PushjetApi.PushjetApi;
-import net.Azise.pushjet.PushjetApi.PushjetException;
-import net.Azise.pushjet.PushjetApi.PushjetService;
-import net.Azise.pushjet.SubscriptionsAdapter;
+import io.Pushjet.api.DatabaseHandler;
+import io.Pushjet.api.PushjetApi.PushjetApi;
+import io.Pushjet.api.PushjetApi.PushjetException;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 
 public class RefreshServiceAsync extends AsyncTask<Void, Void, PushjetService[]> {

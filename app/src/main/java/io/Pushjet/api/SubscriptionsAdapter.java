@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 import java.util.ArrayList;
 import java.util.Collections;

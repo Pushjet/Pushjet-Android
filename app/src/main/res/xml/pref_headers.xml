@@ -3,11 +3,11 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="net.Azise.pushjet.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="io.Pushjet.api.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="net.Azise.pushjet.SettingsActivity$ServerPreferenceFragment"
+        android:fragment="io.Pushjet.api.SettingsActivity$ServerPreferenceFragment"
         android:title="@string/pref_header_server" />
 
 </preference-headers>

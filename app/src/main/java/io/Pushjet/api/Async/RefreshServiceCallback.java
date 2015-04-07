@@ -1,6 +1,6 @@
-package net.Azise.pushjet.Async;
+package io.Pushjet.api.Async;
 
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 
 public interface RefreshServiceCallback {

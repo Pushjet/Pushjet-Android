@@ -1,4 +1,4 @@
-package net.Azise.pushjet;
+package io.Pushjet.api;
 
 
 import android.content.ContentValues;
@@ -8,9 +8,9 @@ import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import net.Azise.pushjet.PushjetApi.PushjetException;
-import net.Azise.pushjet.PushjetApi.PushjetMessage;
-import net.Azise.pushjet.PushjetApi.PushjetService;
+import io.Pushjet.api.PushjetApi.PushjetException;
+import io.Pushjet.api.PushjetApi.PushjetMessage;
+import io.Pushjet.api.PushjetApi.PushjetService;
 
 import java.util.ArrayList;
 import java.util.Date;
