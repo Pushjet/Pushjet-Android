@@ -65,7 +65,7 @@ public class PushjetApi {
         Map<String, String> data = this.getBaseMap();
         JSONObject obj = this.apiHttpGet("/listen", data);
         try {
-            JSONArray lstn = obj.getJSONArray("listen");
+            JSONArray lstn = obj.getJSONArray("listens");
             PushjetService[] srv = new PushjetService[lstn.length()];
             for (int i = 0; i < srv.length; i++) {
                 JSONObject o = lstn.getJSONObject(i).getJSONObject("service");
