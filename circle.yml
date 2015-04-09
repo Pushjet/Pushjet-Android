@@ -1,0 +1,7 @@
+test:
+  override:
+    - ./gradlew clean assembleDebug
+
+general:
+  artifacts:
+    - "app/build/outputs/apk/app-debug.apk" # Installable APK that users can install live on the bleeding edge
