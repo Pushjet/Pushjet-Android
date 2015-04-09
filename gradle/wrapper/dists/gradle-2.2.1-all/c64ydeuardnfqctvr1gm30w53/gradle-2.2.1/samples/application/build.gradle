@@ -1,0 +1,29 @@
+apply plugin:'java'
+apply plugin:'application'
+
+version = '1.0.2'
+
+mainClassName = "org.gradle.sample.Main"
+
+applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
+
+task createDocs {
+    def docs = file("$buildDir/docs")
+    outputs.dir docs
+    doLast {
+        docs.mkdirs()
+        new File(docs, "readme.txt").write("Read me!")
+    }
+}
+
+applicationDistribution.from(createDocs) {
+    into "docs"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-collections:commons-collections:3.2.1'
+}

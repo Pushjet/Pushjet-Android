@@ -1,0 +1,19 @@
+configurations {
+    compile
+}
+
+println configurations.compile.name
+println configurations['compile'].name
+
+configurations {
+    compile {
+        description = 'compile classpath'
+        transitive = true
+    }
+    runtime {
+        extendsFrom compile
+    }
+}
+configurations.compile {
+    description = 'compile classpath'
+}

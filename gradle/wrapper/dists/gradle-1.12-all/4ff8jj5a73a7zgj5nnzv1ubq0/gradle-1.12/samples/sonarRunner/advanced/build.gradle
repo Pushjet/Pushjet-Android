@@ -1,0 +1,20 @@
+apply plugin: "java"
+apply plugin: "sonar-runner"
+
+sourceSets {
+    custom
+    integTest
+}
+
+sonarRunner {
+    sonarProperties {
+        properties["sonar.sources"] += sourceSets.custom.allSource.srcDirs
+        properties["sonar.tests"] += sourceSets.integTest.allSource.srcDirs
+    }
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.language", "grvy" // set language to Groovy
+    }
+}

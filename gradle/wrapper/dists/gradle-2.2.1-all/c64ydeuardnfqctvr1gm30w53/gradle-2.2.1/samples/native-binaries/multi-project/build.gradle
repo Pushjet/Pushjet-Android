@@ -1,0 +1,29 @@
+project(":lib") {
+    apply plugin: "cpp"
+    libraries {
+        main {}
+    }
+    // For any shared library binaries built with Visual C++,
+    // define the DLL_EXPORT macro
+    binaries.withType(SharedLibraryBinarySpec) {
+        if (toolChain in VisualCpp) {
+            cppCompiler.define "DLL_EXPORT"
+        }
+    }
+}
+
+project(":exe") {
+    apply plugin: "cpp"
+
+    executables {
+        main {}
+    }
+
+    sources {
+        main {
+            cpp {
+                lib project: ':lib', library: 'main'
+            }
+        }
+    }
+}

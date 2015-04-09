@@ -1,0 +1,13 @@
+apply plugin: "groovy"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "org.codehaus.groovy:groovy:2.3.6"
+}
+
+dependencies {
+    compile localGroovy()
+}

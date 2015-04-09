@@ -1,0 +1,52 @@
+apply plugin: 'java'
+
+if (hasProperty('showOutput')) {
+
+// Various ways to access the main source set
+println sourceSets.main.output.classesDir
+println sourceSets['main'].output.classesDir
+sourceSets {
+    println main.output.classesDir
+}
+sourceSets {
+    main {
+        println output.classesDir
+    }
+}
+
+// Iterate over the source sets
+sourceSets.all {
+    println name
+}
+
+}
+
+sourceSets {
+    intTest
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    intTest
+}
+
+dependencies {
+    intTestCompile 'junit:junit:4.11'
+    intTestRuntime 'org.ow2.asm:asm-all:4.0'
+}
+
+task intTestJar(type: Jar) {
+    from sourceSets.intTest.output
+}
+
+task intTestJavadoc(type: Javadoc) {
+    source sourceSets.intTest.allJava
+}
+
+task intTest(type: Test) {
+    testClassesDir = sourceSets.intTest.output.classesDir
+    classpath = sourceSets.intTest.runtimeClasspath
+}

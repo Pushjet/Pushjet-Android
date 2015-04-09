@@ -1,0 +1,39 @@
+apply plugin: "sonar"
+
+sonar {
+    server {
+        url = "http://my.server.com"
+    }
+    database {
+        url = "jdbc:mysql://my.server.com/sonar"
+        driverClassName = "com.mysql.jdbc.Driver"
+        username = "Fred Flintstone"
+        password = "very clever"
+    }
+}
+
+subprojects {
+    sonar {
+        project {
+            sourceEncoding = "UTF-8"
+        }
+    }
+}
+
+project(":project1") {
+    sonar {
+        project {
+            skip = true
+        }
+    }
+}
+
+project(":project2") {
+    sonar {
+        project {
+            language = "groovy"
+        }
+    }
+}
+
+project(":project2").sonar.project.language = "groovy"

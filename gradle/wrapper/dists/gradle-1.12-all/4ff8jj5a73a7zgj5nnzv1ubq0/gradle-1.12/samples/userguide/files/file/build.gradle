@@ -1,0 +1,8 @@
+// Using a relative path
+File configFile = file('src/config.xml')
+
+// Using an absolute path
+configFile = file(configFile.absolutePath)
+
+// Using a File object with a relative path
+configFile = file(new File('src/config.xml'))

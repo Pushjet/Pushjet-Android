@@ -1,0 +1,11 @@
+project('projectA') {
+    task taskX(dependsOn: ':projectB:taskY') << {
+        println 'taskX'
+    }
+}
+
+project('projectB') {
+    task taskY << {
+        println 'taskY'
+    }
+}

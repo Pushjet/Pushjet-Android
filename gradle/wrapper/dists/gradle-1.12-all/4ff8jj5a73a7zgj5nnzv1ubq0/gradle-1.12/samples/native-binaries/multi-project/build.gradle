@@ -1,0 +1,22 @@
+project(":lib") {
+    apply plugin: "cpp"
+    libraries {
+        main {}
+    }
+}
+
+project(":exe") {
+    apply plugin: "cpp"
+
+    executables {
+        main {}
+    }
+
+    sources {
+        main {
+            cpp {
+                lib project: ':lib', library: 'main'
+            }
+        }
+    }
+}

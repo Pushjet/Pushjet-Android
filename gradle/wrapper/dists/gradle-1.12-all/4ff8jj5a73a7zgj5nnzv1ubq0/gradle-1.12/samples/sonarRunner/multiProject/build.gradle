@@ -1,0 +1,35 @@
+apply plugin: "sonar-runner"
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://my.server.com"
+        property "sonar.jdbc.url", "jdbc:mysql://my.server.com/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "Fred Flintstone"
+        property "sonar.jdbc.password", "very clever"
+    }
+}
+
+
+subprojects {
+    sonarRunner {
+        sonarProperties {
+            property "sonar.sourceEncoding", "UTF-8"
+        }
+    }
+}
+
+project(":project1") {
+    sonarRunner {
+        sonarProperties {
+            property "sonar.language", "grvy"
+        }
+    }
+}
+
+project(":project2") {
+    sonarRunner {
+        skipProject = true
+    }
+}
+

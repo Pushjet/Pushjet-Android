@@ -1,0 +1,4 @@
+println "configuring $project"
+task hello << {
+    println 'hello from other script'
+}

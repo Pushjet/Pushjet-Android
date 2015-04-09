@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+sourceSets.main.output.classesDir = file("$buildDir/output/classes")
+
+task show << {
+    println relativePath(compileJava.destinationDir)
+}

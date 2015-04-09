@@ -1,0 +1,32 @@
+apply plugin: "java"
+apply plugin: "sonar"
+
+sourceSets {
+    custom
+    integTest
+}
+
+sonar.project {
+    sourceDirs += sourceSets.custom.allSource.srcDirs
+    testDirs += sourceSets.integTest.allSource.srcDirs
+}
+
+sonar.project {
+    language = "grvy" // set language to Groovy
+}
+
+sonar.withGlobalProperties { props ->
+    props["some.global.property"] = "some value"
+    // non-String values are automatically converted to Strings
+    props["other.global.property"] = ["foo", "bar", "baz"]
+}
+
+sonar.project.withProjectProperties { props ->
+    props["some.project.property"] = "some value"
+    // non-String values are automatically converted to Strings
+    props["other.project.property"] = ["foo", "bar", "baz"]
+}
+
+sonar.project {
+    language = System.getProperty("sonar.language", "java")
+}

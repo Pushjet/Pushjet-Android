@@ -1,0 +1,3 @@
+task action(dependsOn: ":producer:action") << {
+    println("Consuming message: ${rootProject.producerMessage}")
+}

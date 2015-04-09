@@ -1,0 +1,21 @@
+apply plugin: 'distribution'
+
+version = '1.0.0'
+
+apply plugin: 'distribution'
+
+distributions {
+    main {
+        baseName = 'someName'
+        contents {
+            from { 'src/readme' }
+        }
+    }
+}
+
+apply plugin: 'distribution'
+
+version = '1.2'
+distributions {
+    custom {}
+}

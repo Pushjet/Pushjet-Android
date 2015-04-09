@@ -1,0 +1,5 @@
+task copy(type: Copy)
+
+task copy(overwrite: true) << {
+    println('I am the new one.')
+}

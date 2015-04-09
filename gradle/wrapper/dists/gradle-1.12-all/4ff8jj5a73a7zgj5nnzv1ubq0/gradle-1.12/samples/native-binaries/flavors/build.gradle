@@ -1,0 +1,35 @@
+apply plugin: 'cpp'
+
+sources {
+    exe {}
+    lib {}
+}
+model {
+    flavors {
+        english
+        french
+    }
+}
+
+libraries {
+    hello {
+        binaries.all {
+            if (flavor == flavors.french) {
+                cppCompiler.define "FRENCH"
+            }
+        }
+        source sources.lib
+    }
+}
+binaries.withType(SharedLibraryBinary) {
+    cppCompiler.define "DLL_EXPORT"
+}
+
+executables {
+    main {
+        source sources.exe
+        binaries.all {
+            lib libraries.hello
+        }
+    }
+}

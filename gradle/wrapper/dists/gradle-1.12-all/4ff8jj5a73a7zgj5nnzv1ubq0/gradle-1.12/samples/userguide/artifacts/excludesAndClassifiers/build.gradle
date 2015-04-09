@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+repositories {
+    ivy {
+        ivyPattern "$projectDir/repo/[organisation]/[module]-ivy-[revision].xml"
+        artifactPattern "$projectDir/repo/[organisation]/[module]-[revision](-[classifier]).[ext]"
+    }
+}
+
+configurations {
+    otherConf
+    compile.exclude module: 'commons'
+    all*.exclude group: 'org.gradle.test.excludes', module: 'reports'
+}
+
+dependencies {
+	compile("org.gradle.test.excludes:api:1.0") {
+	    exclude module: 'shared'
+	}
+    runtime 'org.gradle.test.excludes:other-api:1.0'
+	compile "org.gradle.test.classifiers:service:1.0:jdk15@jar"
+    otherConf group: 'org.gradle.test.classifiers', name: 'service', version: '1.0', classifier: 'jdk14'
+}
+
+task resolveCompile << {
+	println configurations.compile.resolve()
+	println configurations.otherConf.resolve()
+}
+
+task resolveRuntime << {
+	println configurations.runtime.resolve()
+}

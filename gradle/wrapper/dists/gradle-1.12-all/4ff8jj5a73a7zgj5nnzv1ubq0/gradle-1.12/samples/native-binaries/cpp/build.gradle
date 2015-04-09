@@ -1,0 +1,41 @@
+apply plugin: 'cpp'
+
+libraries {
+    hello {}
+}
+
+executables {
+    main {}
+}
+
+sources {
+    main {
+        cpp {
+            lib libraries.hello
+        }
+    }
+}
+
+binaries.all {
+    // Define a preprocessor macro for every binary
+    cppCompiler.define "NDEBUG"
+
+    // Define toolchain-specific compiler and linker options
+    if (toolChain in Gcc) {
+        cppCompiler.args "-O2", "-fno-access-control"
+        linker.args "-Xlinker", "-S"
+    }
+    if (toolChain in VisualCpp) {
+        cppCompiler.args "/Zi"
+        linker.args "/DEBUG"
+    }
+}
+
+// For any shared library binaries built with Visual C++, define the DLL_EXPORT macro
+binaries.withType(SharedLibraryBinary) {
+    if (toolChain in VisualCpp) {
+        cppCompiler.define "DLL_EXPORT"
+    }
+}
+
+

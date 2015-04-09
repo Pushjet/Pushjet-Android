@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.castorflex.smoothprogressbar</groupId>
+  <artifactId>library</artifactId>
+  <version>0.4.0</version>
+  <packaging>aar</packaging>
+  <name>SmoothProgressBar Library</name>
+  <description>Android Library make smooth progress bars</description>
+  <url>https://github.com/castorflex/SmoothProgressBar</url>
+  <licenses>
+    <license>
+      <name>THE BEER-WARE LICENSE, Revision 42</name>
+      <url>https://en.wikipedia.org/wiki/Beerware</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>castorflex</id>
+      <name>Antoine Merle</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git@github.com:castorflex/SmoothProgressBar.git</connection>
+    <developerConnection>scm:git@github.com:castorflex/SmoothProgressBar.git</developerConnection>
+    <url>https://github.com/castorflex/SmoothProgressBar</url>
+  </scm>
+</project>

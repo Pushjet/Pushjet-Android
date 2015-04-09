@@ -1,0 +1,17 @@
+apply plugin: 'objective-cpp'
+
+executables {
+    main {}
+}
+
+
+binaries.all {
+    objcppCompiler.args "-I/usr/include/GNUstep", "-I/usr/local/include/objc", "-fconstant-string-class=NSConstantString", "-D_NATIVE_OBJC_EXCEPTIONS"
+
+    //on osx we need different linker settings than on linux or windows
+    if(targetPlatform.operatingSystem.isMacOsX()){
+        linker.args "-framework", "Foundation"
+    }else{
+        linker.args "-lgnustep-base", "-lobjc"
+    }
+}

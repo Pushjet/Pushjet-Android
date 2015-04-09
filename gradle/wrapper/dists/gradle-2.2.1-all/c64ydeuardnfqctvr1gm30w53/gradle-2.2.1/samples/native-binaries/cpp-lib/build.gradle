@@ -1,0 +1,10 @@
+apply plugin: "cpp"
+
+libraries {
+    main {
+        binaries.withType(SharedLibraryBinarySpec) {
+            // Define a preprocessor macro that only applies to shared libraries
+            cppCompiler.define "DLL_EXPORT"
+        }
+    }
+}

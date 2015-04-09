@@ -1,0 +1,10 @@
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'antlr:antlr:2.7.7'
+    testCompile 'junit:junit:4.11'
+}

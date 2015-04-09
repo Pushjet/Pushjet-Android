@@ -1,0 +1,3 @@
+task consume << {
+    println("Consuming message: ${rootProject.producerMessage}")
+}

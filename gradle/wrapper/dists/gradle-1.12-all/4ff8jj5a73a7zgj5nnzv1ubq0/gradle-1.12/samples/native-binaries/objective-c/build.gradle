@@ -1,0 +1,17 @@
+apply plugin: 'objective-c'
+
+executables {
+    main {}
+}
+
+
+binaries.all {
+    objcCompiler.args "-I/usr/include/GNUstep", "-fconstant-string-class=NSConstantString", "-D_NATIVE_OBJC_EXCEPTIONS"
+
+    //on osx we need different settings than on linux or windows
+    if(targetPlatform.operatingSystem.isMacOsX()){
+        linker.args "-framework", "Foundation"
+    }else{
+        linker.args "-lgnustep-base", "-lobjc"
+    }
+}

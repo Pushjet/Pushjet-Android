@@ -1,0 +1,18 @@
+apply plugin: 'announce'
+apply plugin: 'build-announcements'
+
+announce {  
+  username = 'myId'
+  password = 'myPassword'
+}
+
+
+task helloWorld << {  
+    println "Hello, world!"
+}  
+
+helloWorld.doLast {  
+    announce.announce("helloWorld completed!", "twitter")
+    announce.announce("helloWorld completed!", "local")
+}
+
