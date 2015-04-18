@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">#4764AD</item>
+        <item name="android:colorPrimaryDark">#293A65</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="SettingsTheme" parent="AppTheme">
+        <!--
+            Patches the fact that for some reason the settings
+            activity grabs the value for the text color from
+            android:textColorPrimary instead of using the correct
+            color.
+        -->
+        <item name="android:textColor">#000000</item>
+    </style>
+</resources>
