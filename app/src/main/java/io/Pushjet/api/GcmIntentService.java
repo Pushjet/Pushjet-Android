@@ -29,7 +29,6 @@ import java.util.Date;
 
 public class GcmIntentService extends IntentService {
     private static int NOTIFICATION_ID = 0;
-    private NotificationCompat.Builder builder;
 
     public GcmIntentService() {
         super("GcmIntentService");
