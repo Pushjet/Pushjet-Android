@@ -59,6 +59,7 @@
         <activity
             android:name="io.Pushjet.api.SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:theme="@style/SettingsTheme"
             android:parentActivityName="io.Pushjet.api.PushListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
