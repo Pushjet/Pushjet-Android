@@ -117,27 +117,11 @@ public class GcmIntentService extends IntentService {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void setPriority(NotificationCompat.Builder mBuilder, PushjetMessage msg) {
-        int priority;
-        switch (msg.getLevel()) {
-            case 1:
-                priority = Notification.PRIORITY_MIN;
-                break;
-            case 2:
-                priority = Notification.PRIORITY_LOW;
-                break;
-            case 3:
-                priority = Notification.PRIORITY_DEFAULT;
-                break;
-            case 4:
-                priority = Notification.PRIORITY_HIGH;
-                break;
-            case 5:
-                priority = Notification.PRIORITY_MAX;
-                break;
-            default:
-                priority = Notification.PRIORITY_DEFAULT;
-                break;
+        int priority = msg.getLevel() - 3;
+        if(Math.abs(priority) > 2) {
+            priority = 0;
         }
+
         mBuilder.setPriority(priority);
     }
 }
