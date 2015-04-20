@@ -23,4 +23,4 @@ The [permissions][4] used by Pushjet might seem a bit broad but they all have a 
 [3]: http://pushjet.io/img/screenshot_2.png?5
 [6]: http://pushjet.io/img/screenshot_3.png?5
 [4]: /app/src/main/AndroidManifest.xml
-[5]: /app/src/main/java/net/Azise/pushjet/PushjetApi/DeviceUuidFactory.java
+[5]: https://github.com/Pushjet/Pushjet-Android/blob/master/app/src/main/java/io/Pushjet/api/PushjetApi/DeviceUuidFactory.java
