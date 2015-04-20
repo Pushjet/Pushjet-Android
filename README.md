@@ -15,11 +15,12 @@ The [permissions][4] used by Pushjet might seem a bit broad but they all have a 
   - This makes sure we can receive notifications.
 
 ## Screenshots
-![Pushjet push listing][2] ![Subscriptions][3]
+![Pushjet push listing material][6] ![Pushjet push listing][2] ![Subscriptions][3]
 
 
 [1]: https://tldrlegal.com/license/bsd-2-clause-license-%28freebsd%29
-[2]: http://pushjet.io/img/screenshot_1.png?0
-[3]: http://pushjet.io/img/screenshot_2.png?1
+[2]: http://pushjet.io/img/screenshot_1.png?3
+[3]: http://pushjet.io/img/screenshot_2.png?3
+[6]: http://pushjet.io/img/screenshot_3.png?3
 [4]: /app/src/main/AndroidManifest.xml
 [5]: /app/src/main/java/net/Azise/pushjet/PushjetApi/DeviceUuidFactory.java
