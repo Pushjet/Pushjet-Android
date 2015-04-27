@@ -19,8 +19,8 @@ The [permissions][4] used by Pushjet might seem a bit broad but they all have a 
 
 
 [1]: https://tldrlegal.com/license/bsd-2-clause-license-%28freebsd%29
-[2]: http://pushjet.io/img/screenshot_1.png?5
-[3]: http://pushjet.io/img/screenshot_2.png?5
-[6]: http://pushjet.io/img/screenshot_3.png?5
+[2]: http://pushjet.io/images/android/screenshot_1.png
+[3]: http://pushjet.io/images/android/screenshot_2.png
+[6]: http://pushjet.io/images/android/screenshot_3.png
 [4]: /app/src/main/AndroidManifest.xml
 [5]: https://github.com/Pushjet/Pushjet-Android/blob/master/app/src/main/java/io/Pushjet/api/PushjetApi/DeviceUuidFactory.java
