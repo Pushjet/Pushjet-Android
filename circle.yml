@@ -1,6 +1,6 @@
 test:
   override:
-    - ./gradlew clean assembleDebug
+    - ./gradlew clean assembleDebug --recompile-scripts --refresh-dependencies --parallel --stacktrace
 
 general:
   artifacts:
