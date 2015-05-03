@@ -1,8 +1,9 @@
-.idea
-.gradle
+/.idea/
+/.gradle/
+/gradle/caches/
 /local.properties
 /.idea/workspace.xml
-.DS_Store
+/.DS_Store
 /build
 
 # Built application files
