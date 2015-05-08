@@ -1,5 +1,4 @@
-The Pushjet Android Client [![Circle CI](https://circleci.com/gh/Pushjet/Pushjet-Android.svg?style=svg)](https://circleci.com/gh/Pushjet/Pushjet-Android)
-[![License](http://img.shields.io/badge/license-BSD-blue.svg?style=flat)](/LICENSE)
+The Pushjet Android Client [![Circle CI](https://circleci.com/gh/Pushjet/Pushjet-Android.svg?style=svg)](https://circleci.com/gh/Pushjet/Pushjet-Android) [![License](http://img.shields.io/badge/license-BSD-blue.svg?style=flat)](/LICENSE)
 ==========================
 This is the pushjet android client. It currently uses google GCM to send and receive messages. This means 
 that any message that is directed at the android client *will* go through google. The client is licensed 
