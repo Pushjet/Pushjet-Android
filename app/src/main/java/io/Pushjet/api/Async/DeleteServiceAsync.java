@@ -27,7 +27,7 @@ public class DeleteServiceAsync extends AsyncTask<PushjetService, Void, Void> {
     protected Void doInBackground(PushjetService... services) {
         for (PushjetService service : services) {
             try {
-                api.deleteListen(service.getToken());
+                api.deleteSubscription(service.getToken());
                 db.removeService(service);
             } catch (PushjetException e) {
                 e.printStackTrace();

@@ -41,12 +41,12 @@ public class PushjetApi {
         return new Date((long) this.lastCheck * 1000);
     }
 
-    public PushjetService newListen(String service) throws PushjetException {
+    public PushjetService addSubscription(String service) throws PushjetException {
         Map<String, String> data = this.getBaseMap();
         data.put("service", service);
 
         try {
-            JSONObject obj = this.apiHttpPost("/listen", data).getJSONObject("service");
+            JSONObject obj = this.apiHttpPost("/subscription", data).getJSONObject("service");
             PushjetService srv = new PushjetService(obj.getString("public"), obj.getString("name"), new Date((long) obj.getInt("created") * 1000));
             srv.setIcon(obj.getString("icon"));
             return srv;
@@ -55,17 +55,17 @@ public class PushjetApi {
         }
     }
 
-    public void deleteListen(String service) throws PushjetException {
+    public void deleteSubscription(String service) throws PushjetException {
         Map<String, String> data = this.getBaseMap();
         data.put("service", service);
-        this.apiHttpDelete("/listen", data);
+        this.apiHttpDelete("/subscription", data);
     }
 
-    public PushjetService[] listListen() throws PushjetException {
+    public PushjetService[] listSubscriptions() throws PushjetException {
         Map<String, String> data = this.getBaseMap();
-        JSONObject obj = this.apiHttpGet("/listen", data);
+        JSONObject obj = this.apiHttpGet("/subscription", data);
         try {
-            JSONArray lstn = obj.getJSONArray("listens");
+            JSONArray lstn = obj.getJSONArray("subscriptions");
             PushjetService[] srv = new PushjetService[lstn.length()];
             for (int i = 0; i < srv.length; i++) {
                 JSONObject o = lstn.getJSONObject(i).getJSONObject("service");

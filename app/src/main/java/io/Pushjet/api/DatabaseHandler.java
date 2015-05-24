@@ -15,15 +15,16 @@ import io.Pushjet.api.PushjetApi.PushjetService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-    private String TABLE_LISTEN = "listen";
-    private String KEY_LISTEN_TOKEN = "service";
-    private String KEY_LISTEN_SECRET = "secret";
-    private String KEY_LISTEN_NAME = "name";
-    private String KEY_LISTEN_ICON = "icon";
-    private String KEY_LISTEN_TIMESTAMP = "timestamp";
-    private String[] TABLE_LISTEN_KEYS = new String[]{KEY_LISTEN_TOKEN, KEY_LISTEN_SECRET, KEY_LISTEN_NAME, KEY_LISTEN_ICON, KEY_LISTEN_TIMESTAMP};
+    private String TABLE_SUBSCRIPTION = "subscription";
+    private String KEY_SUBSCRIPTION_TOKEN = "service";
+    private String KEY_SUBSCRIPTION_SECRET = "secret";
+    private String KEY_SUBSCRIPTION_NAME = "name";
+    private String KEY_SUBSCRIPTION_ICON = "icon";
+    private String KEY_SUBSCRIPTION_TIMESTAMP = "timestamp";
+    private String[] TABLE_SUBSCRIPTION_KEYS = new String[]{KEY_SUBSCRIPTION_TOKEN, KEY_SUBSCRIPTION_SECRET, KEY_SUBSCRIPTION_NAME, KEY_SUBSCRIPTION_ICON, KEY_SUBSCRIPTION_TIMESTAMP};
 
     private String TABLE_MESSAGE = "messages";
     private String KEY_MESSAGE_ID = "id";
@@ -36,17 +37,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String[] TABLE_MESSAGE_KEYS = new String[]{KEY_MESSAGE_ID, KEY_MESSAGE_SERVICE, KEY_MESSAGE_TEXT, KEY_MESSAGE_TITLE, KEY_MESSAGE_LEVEL, KEY_MESSAGE_TIMESTAMP, KEY_MESSAGE_LINK};
 
     public DatabaseHandler(Context context) {
-        super(context, "Pushjet", null, 2);
+        super(context, "Pushjet", null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE_LISTEN = "CREATE TABLE `" + TABLE_LISTEN + "` (" +
-                "`" + KEY_LISTEN_TOKEN + "` VARCHAR PRIMARY KEY, " +
-                "`" + KEY_LISTEN_SECRET + "` VARCHAR, " +
-                "`" + KEY_LISTEN_NAME + "` VARCHAR," +
-                "`" + KEY_LISTEN_ICON + "` VARCHAR," +
-                "`" + KEY_LISTEN_TIMESTAMP + "` INTEGER)";
+        String CREATE_TABLE_SUBSCRIPTION = "CREATE TABLE `" + TABLE_SUBSCRIPTION + "` (" +
+                "`" + KEY_SUBSCRIPTION_TOKEN + "` VARCHAR PRIMARY KEY, " +
+                "`" + KEY_SUBSCRIPTION_SECRET + "` VARCHAR, " +
+                "`" + KEY_SUBSCRIPTION_NAME + "` VARCHAR," +
+                "`" + KEY_SUBSCRIPTION_ICON + "` VARCHAR," +
+                "`" + KEY_SUBSCRIPTION_TIMESTAMP + "` INTEGER)";
 
         String CREATE_TABLE_MESSAGE = "CREATE TABLE `" + TABLE_MESSAGE + "` (" +
                 "`" + KEY_MESSAGE_ID + "` INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -57,20 +58,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "`" + KEY_MESSAGE_TIMESTAMP + "` INTEGER," +
                 "`" + KEY_MESSAGE_LINK + "` VARCHAR)";
 
-        db.execSQL(CREATE_TABLE_LISTEN);
+        db.execSQL(CREATE_TABLE_SUBSCRIPTION);
         db.execSQL(CREATE_TABLE_MESSAGE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i2) {
-        // Does nothing for now
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 3) {
+            db.execSQL("ALTER TABLE listen RENAME TO " + TABLE_SUBSCRIPTION);
+        }
     }
 
     public PushjetMessage[] getAllMessages() {
         SQLiteDatabase db = this.getReadableDatabase();
 
         try {
-            List<PushjetMessage> result = new ArrayList<PushjetMessage>();
+            List<PushjetMessage> result = new ArrayList<>();
             Cursor cMsg = db.query(TABLE_MESSAGE, TABLE_MESSAGE_KEYS, null, null, null, null, null);
             if (cMsg.getCount() > 0 && cMsg.moveToFirst()) {
                 do {
@@ -130,7 +133,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             String fmt = "`%s` = '%s'";
             db.delete(TABLE_MESSAGE, String.format(fmt, KEY_MESSAGE_SERVICE, service.getToken()), null);
-            db.delete(TABLE_LISTEN, String.format(fmt, KEY_LISTEN_TOKEN, service.getToken()), null);
+            db.delete(TABLE_SUBSCRIPTION, String.format(fmt, KEY_SUBSCRIPTION_TOKEN, service.getToken()), null);
             db.close();
         }
     }
@@ -163,22 +166,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             for (PushjetService service : services) {
-                boolean listening = isListening(service);
+                boolean subscribed = isListening(service);
                 if (!db.isOpen()) db = this.getWritableDatabase();
 
-                if (listening) {
+                if (subscribed) {
                     String fmt = "`%s` = '%s'";
-                    db.delete(TABLE_LISTEN, String.format(fmt, KEY_LISTEN_TOKEN, service.getToken()), null);
+                    db.delete(TABLE_SUBSCRIPTION, String.format(fmt, KEY_SUBSCRIPTION_TOKEN, service.getToken()), null);
                 }
 
                 ContentValues vSrv = new ContentValues();
-                vSrv.put(KEY_LISTEN_TOKEN, service.getToken());
-                vSrv.put(KEY_LISTEN_NAME, service.getName());
-                vSrv.put(KEY_LISTEN_SECRET, service.getSecret());
-                vSrv.put(KEY_LISTEN_ICON, service.getIcon());
-                vSrv.put(KEY_LISTEN_TIMESTAMP, Math.round(service.getCreated().getTime() / 1000L));
+                vSrv.put(KEY_SUBSCRIPTION_TOKEN, service.getToken());
+                vSrv.put(KEY_SUBSCRIPTION_NAME, service.getName());
+                vSrv.put(KEY_SUBSCRIPTION_SECRET, service.getSecret());
+                vSrv.put(KEY_SUBSCRIPTION_ICON, service.getIcon());
+                vSrv.put(KEY_SUBSCRIPTION_TIMESTAMP, Math.round(service.getCreated().getTime() / 1000L));
 
-                db.insert(TABLE_LISTEN, null, vSrv);
+                db.insert(TABLE_SUBSCRIPTION, null, vSrv);
             }
         } finally {
             db.close();
@@ -187,7 +190,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public int getServiceCount() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String countQuery = "SELECT  * FROM " + TABLE_LISTEN;
+        String countQuery = "SELECT  * FROM " + TABLE_SUBSCRIPTION;
 
         try {
             return db.rawQuery(countQuery, null).getCount();
@@ -200,7 +203,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         PushjetService srv;
         try {
-            Cursor cLsn = db.query(TABLE_LISTEN, TABLE_LISTEN_KEYS, KEY_LISTEN_TOKEN + " = ?", new String[]{token}, null, null, null);
+            Cursor cLsn = db.query(TABLE_SUBSCRIPTION, TABLE_SUBSCRIPTION_KEYS, KEY_SUBSCRIPTION_TOKEN + " = ?", new String[]{token}, null, null, null);
             cLsn.moveToFirst();
             srv = new PushjetService(
                     cLsn.getString(0),
@@ -220,8 +223,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void refreshServices(PushjetService[] services) {
         this.addServices(services);
 
-        PushjetService[] listening = this.getAllServices();
-        for (PushjetService l1 : listening) {
+        PushjetService[] subscribed = this.getAllServices();
+        for (PushjetService l1 : subscribed) {
             boolean rm = true;
             for (PushjetService l2 : services) {
                 if (l1.getToken().equals(l2.getToken())) {
@@ -241,7 +244,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         try {
-            Cursor cursor = db.query(TABLE_LISTEN, TABLE_LISTEN_KEYS, KEY_LISTEN_TOKEN + " = ?", new String[]{service}, null, null, null);
+            Cursor cursor = db.query(TABLE_SUBSCRIPTION, TABLE_SUBSCRIPTION_KEYS, KEY_SUBSCRIPTION_TOKEN + " = ?", new String[]{service}, null, null, null);
             return cursor.getCount() > 0;
         } finally {
             db.close();
@@ -253,7 +256,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<PushjetService> result = new ArrayList<PushjetService>();
 
         try {
-            Cursor cSrv = db.query(TABLE_LISTEN, TABLE_LISTEN_KEYS, null, null, null, null, null);
+            Cursor cSrv = db.query(TABLE_SUBSCRIPTION, TABLE_SUBSCRIPTION_KEYS, null, null, null, null, null);
             if (cSrv.getCount() > 0 && cSrv.moveToFirst()) {
                 do {
                     result.add(new PushjetService(
@@ -285,7 +288,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         try {
-            db.delete(TABLE_LISTEN, null, null);
+            db.delete(TABLE_SUBSCRIPTION, null, null);
         } finally {
             db.close();
         }

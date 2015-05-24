@@ -31,9 +31,9 @@ public class FirstLaunchAsync extends AsyncTask<Context, Void, Void> {
             PushjetService service;
             String serviceToken = resources.getString(R.string.pushjet_announce_service);
             try {
-                service = api.newListen(serviceToken);
+                service = api.addSubscription(serviceToken);
             } catch (PushjetException e) {
-                // If it's telling us that we are already listening
+                // If it's telling us that we are already subscribed
                 // to that service then just ignore the error
                 if (e.code != 4) {
                     throw e;

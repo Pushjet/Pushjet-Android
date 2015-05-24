@@ -99,7 +99,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     };
     /**
-     * A preference value change listener that updates the preference's summary
+     * A preference value change subscriptioner that updates the preference's summary
      * to reflect its new value.
      */
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
@@ -151,10 +151,10 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private static void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
+        // Set the subscriptioner to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-        // Trigger the listener immediately with the preference's
+        // Trigger the subscriptioner immediately with the preference's
         // current value.
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
                 PreferenceManager

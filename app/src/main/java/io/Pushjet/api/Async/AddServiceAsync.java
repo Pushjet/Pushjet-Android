@@ -26,7 +26,7 @@ public class AddServiceAsync extends AsyncTask<String, Void, PushjetService> {
     @Override
     protected PushjetService doInBackground(String... strings) {
         try {
-            return api.newListen(strings[0]);
+            return api.addSubscription(strings[0]);
         } catch (PushjetException e) {
             Log.e("ServAsync", e.getMessage());
             exception = e;

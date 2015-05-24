@@ -27,9 +27,9 @@ public class RefreshServiceAsync extends AsyncTask<Void, Void, PushjetService[]>
     @Override
     protected PushjetService[] doInBackground(Void... voids) {
         try {
-            PushjetService[] listen = this.api.listListen();
-            db.refreshServices(listen);
-            return listen;
+            PushjetService[] subscription = this.api.listSubscriptions();
+            db.refreshServices(subscription);
+            return subscription;
         } catch (PushjetException e) {
             e.printStackTrace();
         }
