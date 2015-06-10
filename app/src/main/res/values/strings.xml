@@ -25,7 +25,8 @@
     <string name="pref_server_register">Re-register with server</string>
     <string name="pref_server_use_custom_summary">Advanced; for if you don\'t trust our server and/or you want to host it yourself</string>
     <string name="pref_server_register_summary">You\'ll need to re-register if you change your server settings or if messages are not arriving. WARNING: This will delete all your received notifications!</string>
-
+    <string name="pref_general_encrypt_gcm">Encrypt incoming messages</string>
+    <string name="pref_general_encrypt_gcm_summary">Encrypt messages between the device and the server. This makes it impossible for Google to read your messages. Changing this requires you to re-register to the server to take effect.</string>
 
     <string name="pushjet_announce_service">046d-71edff-198c7108954c-7f8c9-c0943b03f</string>
     <string name="pushjet_welcome_title">Welcome to pushjet!</string>

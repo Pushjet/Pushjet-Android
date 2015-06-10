@@ -1,6 +1,5 @@
 package io.Pushjet.api;
 
-
 import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.Notification;
@@ -41,24 +40,26 @@ public class GcmIntentService extends IntentService {
         String messageType = gcm.getMessageType(intent);
 
         if (!extras.isEmpty() && GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+            String rawJson = extras.getString("message");
+
             try {
-                JSONObject AzMsg = new JSONObject(extras.getString("message"));
-                JSONObject AzServ = AzMsg.getJSONObject("service");
+                JSONObject Msg = new JSONObject(rawJson);
+                JSONObject Srv = Msg.getJSONObject("service");
                 PushjetService srv = new PushjetService(
-                        AzServ.getString("public"),
-                        AzServ.getString("name"),
-                        new Date((long) AzServ.getInt("created") * 1000)
+                        Srv.getString("public"),
+                        Srv.getString("name"),
+                        new Date((long) Srv.getInt("created") * 1000)
                 );
-                srv.setIcon(AzServ.getString("icon"));
+                srv.setIcon(Srv.getString("icon"));
 
                 PushjetMessage msg = new PushjetMessage(
                         srv,
-                        AzMsg.getString("message"),
-                        AzMsg.getString("title"),
-                        AzMsg.getInt("timestamp")
+                        Msg.getString("message"),
+                        Msg.getString("title"),
+                        Msg.getInt("timestamp")
                 );
-                msg.setLevel(AzMsg.getInt("level"));
-                msg.setLink(AzMsg.getString("link"));
+                msg.setLevel(Msg.getInt("level"));
+                msg.setLink(Msg.getString("link"));
                 DatabaseHandler db = new DatabaseHandler(this);
                 db.addMessage(msg);
                 sendNotification(msg);

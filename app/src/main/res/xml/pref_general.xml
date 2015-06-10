@@ -4,4 +4,10 @@
         android:key="general_reset"
         android:title="@string/pref_general_reset" />
 
+    <CheckBoxPreference
+        android:key="general_encrypt_gcm"
+        android:title="@string/pref_general_encrypt_gcm"
+        android:summary="@string/pref_general_encrypt_gcm_summary"
+        android:defaultValue="true" />
+
 </PreferenceScreen>
