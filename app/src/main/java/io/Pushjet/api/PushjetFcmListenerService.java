@@ -35,7 +35,6 @@ public class PushjetFcmListenerService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage message) {
         String from = message.getFrom();
         Map data = message.getData();
-        Log.d(TAG, "Message from: " + from);
         try {
             JSONObject AzMsg = new JSONObject((String)data.get("message"));
             JSONObject AzServ = AzMsg.getJSONObject("service");

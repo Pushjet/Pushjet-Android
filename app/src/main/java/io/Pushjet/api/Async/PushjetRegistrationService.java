@@ -38,7 +38,6 @@ public class PushjetRegistrationService extends Service {
         Set<String> keySet = intent.getExtras().keySet();
         Boolean force = false;
 
-        Log.d(TAG, "onStartCommand");
         if (keySet.contains(PROPERTY_UNREGISTER)) {
             forgetRegistration();
             force = true;
@@ -47,7 +46,6 @@ public class PushjetRegistrationService extends Service {
         if (keySet.contains(PROPERTY_FCM_TOKEN)) {
             String regId = String.valueOf(intent.getStringExtra(PROPERTY_FCM_TOKEN));
             storeToken(regId);
-            Log.d(TAG, "Token Registered.");
         }
 
         registerInBackground(force);

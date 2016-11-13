@@ -16,7 +16,7 @@ public class PushjetFirebaseInstanceIDService extends FirebaseInstanceIdService 
     public void onTokenRefresh() {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
+        Log.d(TAG, "FCM Token refreshed.");
 
         // call PushjetRegistrationService to update the token
         Intent intent = new Intent(this, PushjetRegistrationService.class);
