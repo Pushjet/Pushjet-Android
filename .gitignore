@@ -26,3 +26,5 @@ local.properties
 proguard/
 # Log Files
 *.log
+# IntelliJ files
+*.iml
