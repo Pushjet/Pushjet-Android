@@ -1,54 +1,73 @@
 package io.Pushjet.api.Async;
 
 
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.IBinder;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
 import io.Pushjet.api.HttpUtil;
 import io.Pushjet.api.PushjetApi.DeviceUuidFactory;
+import io.Pushjet.api.PushjetFirebaseInstanceIDService;
 import io.Pushjet.api.SettingsActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-public class GCMRegistrar {
+public class PushjetRegistrationService extends Service {
     public static final String PROPERTY_REG_ID = "registration_id";
+    public static final String PROPERTY_UNREGISTER = "unregister";
+    public static final String PROPERTY_FCM_TOKEN = "fcm_token";
     private static final String PROPERTY_APP_VERSION = "app_version";
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    protected String TAG = "GCM";
-    private GoogleCloudMessaging gcm;
-    private Context mContext;
+    protected String TAG = "PushjetRegSvc";
+    private Context mContext = this;
 
-    public GCMRegistrar(Context context) {
-        this.mContext = context;
-        gcm = GoogleCloudMessaging.getInstance(context);
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Set<String> keySet = intent.getExtras().keySet();
+        Boolean force = false;
+
+        Log.d(TAG, "onStartCommand");
+        if (keySet.contains(PROPERTY_UNREGISTER)) {
+            forgetRegistration();
+            force = true;
+        }
+
+        if (keySet.contains(PROPERTY_FCM_TOKEN)) {
+            String regId = String.valueOf(intent.getStringExtra(PROPERTY_FCM_TOKEN));
+            storeToken(regId);
+            Log.d(TAG, "Token Registered.");
+        }
+
+        registerInBackground(force);
+
+        return START_STICKY;
     }
 
-    public boolean checkPlayServices(android.app.Activity self) {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(mContext);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            Log.e(TAG, "This device does not support GCM");
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode) && self != null) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, self, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Toast.makeText(mContext, "Sorry, you need to have the Google Play services installed :<", Toast.LENGTH_SHORT).show();
-            }
-            return false;
-        } else {
-            Log.i(TAG, "Pushjet is ready for Take-Off!");
-        }
-        return true;
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+
+    private void storeToken(String token) {
+        final SharedPreferences prefs = getGcmPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putString(PROPERTY_FCM_TOKEN, token);
+        editor.apply();
     }
 
     private void storeRegistrationId(String regId) {
@@ -72,6 +91,10 @@ public class GCMRegistrar {
         return registrationId;
     }
 
+    private String getToken() {
+        return getGcmPreferences(mContext).getString(PROPERTY_FCM_TOKEN, "");
+    }
+
     public int getAppVersion() {
         try {
             PackageInfo packageInfo = mContext.getPackageManager()
@@ -83,7 +106,19 @@ public class GCMRegistrar {
     }
 
     private SharedPreferences getGcmPreferences(Context context) {
-        return context.getSharedPreferences(GCMRegistrar.class.getSimpleName(), Context.MODE_PRIVATE);
+        return context.getSharedPreferences(PushjetFirebaseInstanceIDService.class.getSimpleName(), Context.MODE_PRIVATE);
+    }
+
+    public boolean shouldRegister() {
+        return getRegistrationId().equals("");
+    }
+
+    public void forgetRegistration() {
+        final SharedPreferences prefs = getGcmPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(PROPERTY_REG_ID);
+        editor.remove(PROPERTY_APP_VERSION);
+        editor.commit();
     }
 
     public AsyncRegistrar registerInBackground() {
@@ -94,19 +129,6 @@ public class GCMRegistrar {
         AsyncRegistrar task = new AsyncRegistrar();
         task.execute(force);
         return task;
-    }
-
-    public boolean shouldRegister() {
-        return getRegistrationId().equals("");
-    }
-
-    public void forgetRegistration() {
-        final SharedPreferences prefs = getGcmPreferences(mContext);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.putString(PROPERTY_REG_ID, "");
-        editor.putInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
-        editor.commit();
     }
 
     private static boolean asyncAlreadyRunning = false;
@@ -131,10 +153,7 @@ public class GCMRegistrar {
             Looper.prepare();
 
             try {
-                if (gcm == null) {
-                    gcm = GoogleCloudMessaging.getInstance(mContext);
-                }
-                String regid = gcm.register(senderId);
+                String regid = getToken();
 
                 Map<String, String> data = new HashMap<String, String>();
                 data.put("regId", regid);
@@ -172,3 +191,5 @@ public class GCMRegistrar {
         }
     }
 }
+
+
