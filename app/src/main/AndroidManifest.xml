@@ -4,13 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.sonymobile.permission.SYSTEM_UI_VISIBILITY_EXTENSIONS" />
-
-    <permission android:name="io.Pushjet.api.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="io.Pushjet.api.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -44,17 +39,26 @@
                 android:value="io.Pushjet.api.PushListActivity" />
         </activity>
 
-        <receiver
-            android:name="io.Pushjet.api.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+        <service
+            android:name="io.Pushjet.api.PushjetFcmListenerService">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="io.Pushjet.api" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </receiver>
+        </service>
 
-        <service android:name="io.Pushjet.api.GcmIntentService" />
+        <service
+            android:name="io.Pushjet.api.PushjetFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="io.Pushjet.api.Async.PushjetRegistrationService">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
 
         <activity
             android:name="io.Pushjet.api.SettingsActivity"
