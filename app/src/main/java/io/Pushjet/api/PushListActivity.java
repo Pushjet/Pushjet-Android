@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import io.Pushjet.api.Async.FirstLaunchAsync;
-import io.Pushjet.api.Async.GCMRegistrar;
 import io.Pushjet.api.Async.ReceivePushAsync;
 import io.Pushjet.api.Async.ReceivePushCallback;
 import io.Pushjet.api.PushjetApi.PushjetApi;
@@ -82,16 +81,6 @@ public class PushListActivity extends ListActivity {
                 return true;
             }
         });
-
-
-        GCMRegistrar mGCMRegistrar = new GCMRegistrar(getApplicationContext());
-        if (firstLaunch || mGCMRegistrar.shouldRegister()) {
-            if (mGCMRegistrar.checkPlayServices(this)) {
-                mGCMRegistrar.registerInBackground(firstLaunch);
-            } else {
-                finish();
-            }
-        }
 
         receiver = new BroadcastReceiver() {
             @Override
