@@ -223,6 +223,14 @@ public class SettingsActivity extends PreferenceActivity {
      * {@inheritDoc}
      */
     @Override
+    protected boolean isValidFragment(String fragmentName) {
+        return fragmentName == null || fragmentName.startsWith(SettingsActivity.class.getPackage().getName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this) && !isSimplePreferences(this);
     }
