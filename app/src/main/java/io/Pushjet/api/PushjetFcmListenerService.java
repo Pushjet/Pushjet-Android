@@ -2,7 +2,6 @@ package io.Pushjet.api;
 
 
 import android.annotation.TargetApi;
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,11 +11,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 import io.Pushjet.api.PushjetApi.PushjetMessage;
 import io.Pushjet.api.PushjetApi.PushjetService;
@@ -26,48 +25,40 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 
-public class GcmIntentService extends IntentService {
+public class PushjetFcmListenerService extends FirebaseMessagingService {
     private static int NOTIFICATION_ID = 0;
-
-    public GcmIntentService() {
-        super("GcmIntentService");
-    }
+    private static final String TAG = "PushjetGcmListeners";
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-        String messageType = gcm.getMessageType(intent);
+    public void onMessageReceived(RemoteMessage message) {
+        String from = message.getFrom();
+        Map data = message.getData();
+        try {
+            JSONObject AzMsg = new JSONObject((String)data.get("message"));
+            JSONObject AzServ = AzMsg.getJSONObject("service");
+            PushjetService srv = new PushjetService(
+                    AzServ.getString("public"),
+                    AzServ.getString("name"),
+                    new Date((long) AzServ.getInt("created") * 1000)
+            );
+            srv.setIcon(AzServ.getString("icon"));
 
-        if (!extras.isEmpty() && GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-            try {
-                JSONObject AzMsg = new JSONObject(extras.getString("message"));
-                JSONObject AzServ = AzMsg.getJSONObject("service");
-                PushjetService srv = new PushjetService(
-                        AzServ.getString("public"),
-                        AzServ.getString("name"),
-                        new Date((long) AzServ.getInt("created") * 1000)
-                );
-                srv.setIcon(AzServ.getString("icon"));
-
-                PushjetMessage msg = new PushjetMessage(
-                        srv,
-                        AzMsg.getString("message"),
-                        AzMsg.getString("title"),
-                        AzMsg.getInt("timestamp")
-                );
-                msg.setLevel(AzMsg.getInt("level"));
-                msg.setLink(AzMsg.getString("link"));
-                DatabaseHandler db = new DatabaseHandler(this);
-                db.addMessage(msg);
-                sendNotification(msg);
-            } catch (JSONException ignore) {
-                Log.e("PushjetJson", ignore.getMessage());
-            }
+            PushjetMessage msg = new PushjetMessage(
+                    srv,
+                    AzMsg.getString("message"),
+                    AzMsg.getString("title"),
+                    AzMsg.getInt("timestamp")
+            );
+            msg.setLevel(AzMsg.getInt("level"));
+            msg.setLink(AzMsg.getString("link"));
+            DatabaseHandler db = new DatabaseHandler(this);
+            db.addMessage(msg);
+            sendNotification(msg);
+        } catch (JSONException ignore) {
+            Log.e("PushjetJson", ignore.getMessage());
         }
-        GcmBroadcastReceiver.completeWakefulIntent(intent);
-        sendBroadcast(new Intent("PushjetMessageRefresh"));
     }
 
     private void sendNotification(PushjetMessage msg) {
@@ -124,4 +115,3 @@ public class GcmIntentService extends IntentService {
         mBuilder.setPriority(priority);
     }
 }
-

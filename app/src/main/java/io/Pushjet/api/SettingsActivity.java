@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -15,7 +16,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
-import io.Pushjet.api.Async.GCMRegistrar;
+import io.Pushjet.api.Async.PushjetRegistrationService;
 import io.Pushjet.api.Async.RefreshServiceAsync;
 import io.Pushjet.api.PushjetApi.PushjetApi;
 
@@ -71,12 +72,12 @@ public class SettingsActivity extends PreferenceActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        GCMRegistrar gcm = new GCMRegistrar(context);
-
-                        gcm.forgetRegistration();
                         db.truncateMessages();
                         db.truncateServices();
-                        gcm.registerInBackground(true);
+
+                        Intent intent = new Intent(context, PushjetRegistrationService.class);
+                        intent.putExtra(PushjetRegistrationService.PROPERTY_UNREGISTER, "");
+                        context.startService(intent);
 
                         PushjetApi api = new PushjetApi(context, getRegisterUrl(context));
                         new RefreshServiceAsync(api, db).execute();

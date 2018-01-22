@@ -1,3 +1,8 @@
+dependencies:
+  pre:
+    - echo y | android update sdk -u -a -t tool
+    - echo y | android update sdk --no-ui --all --filter "android-23,build-tools-23.0.3"
+
 test:
   override:
     - ./gradlew clean assembleDebug --recompile-scripts --refresh-dependencies --parallel --stacktrace
@@ -5,3 +10,7 @@ test:
 general:
   artifacts:
     - "app/build/outputs/apk/app-debug.apk" # Installable APK that users can install live on the bleeding edge
+
+machine:
+  java:
+    version: 'oraclejdk8'
