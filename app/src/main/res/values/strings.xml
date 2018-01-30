@@ -21,6 +21,7 @@
     <string name="perf_server_use_custom">Use custom server</string>
     <string name="pref_server_custom_url">Server URL</string>
     <string name="pref_server_custom_sender_id">Custom Sender ID</string>
+    <string name="pref_server_custom_sender_default">509878466986</string>
     <string name="pref_general_reset">Delete all notifications</string>
     <string name="pref_server_register">Re-register with server</string>
     <string name="pref_server_use_custom_summary">Advanced; for if you don\'t trust our server and/or you want to host it yourself</string>
