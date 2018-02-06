@@ -70,7 +70,7 @@ public class PushListAdapter extends BaseAdapter {
         if (title.equals(""))
             title = entries.get(position).getService().getName();
         String description = entries.get(position).getMessage();
-        Date pushDate = entries.get(position).getLocalTimestamp();
+        Date pushDate = entries.get(position).getTimestamp();
         Bitmap icon = entries.get(position).getService().getIconBitmapOrDefault(context);
 
         dateText.setText(this.df.format(pushDate));

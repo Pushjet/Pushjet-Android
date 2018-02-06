@@ -77,10 +77,6 @@ public class PushjetMessage {
         this.timestamp = timestamp;
     }
 
-    public Date getLocalTimestamp() {
-        return new Date(timestamp.getTime() + TimeZone.getDefault().getOffset(System.currentTimeMillis()));
-    }
-
     public String getTitleOrName() {
         String ret = title;
         if (ret.equals(""))
