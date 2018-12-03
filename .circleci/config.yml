@@ -18,5 +18,5 @@ jobs:
           name: Run Build
           command: export TERM=${TERM:-dumb} && ./gradlew build --recompile-scripts --refresh-dependencies --parallel --stacktrace
       - store_artifacts:
-          path: app/build/outputs/apk/debug/
+          path: app/build/outputs/apk/debug/*.apk
           destination: artifact-file
