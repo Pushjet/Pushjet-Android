@@ -10,9 +10,6 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androiDependencies
       - save_cache:
           paths:
             - ~/.gradle
