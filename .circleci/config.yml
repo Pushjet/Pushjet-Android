@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/app/src/main
+    working_directory: ~/app/
     docker:
       - image: circleci/android:api-25-alpha
     environment:
@@ -16,7 +16,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
       - run:
           name: Run Build
-          command: export TERM=${TERM:-dumb} && ./gradlew assembleDebug 
+          command: export TERM=${TERM:-dumb} && ./gradlew assembleDebug --recompile-scripts --refresh-dependencies --parallel --stacktrace
       - store_artifacts:
-          path: app/build/outputs/apk/apk-debug.apk
+          path: build/outputs/apk/apk-debug.apk
           destination: outputs
