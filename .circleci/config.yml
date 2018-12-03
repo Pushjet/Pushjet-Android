@@ -16,7 +16,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
       - run:
           name: Run Build
-          command: export TERM=${TERM:-dumb} && ./gradlew assembleDebug --recompile-scripts --refresh-dependencies --parallel --stacktrace
+          command: export TERM=${TERM:-dumb} && ./gradlew assembleDebug --recompile-scripts --refresh-dependencies --parallel --stacktrace && mkdir -p /tmp/apks/ && cp ~/app/build/outputs/apk/apk-debug.apk /tmp/apks/
       - store_artifacts:
-          path: build/outputs/apk/apk-debug.apk
-          destination: outputs
+          path: /tmp/apks/
+          destination: apks/
