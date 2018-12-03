@@ -11,6 +11,10 @@ android {
         versionCode 6
         versionName "1.4"
     }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
     buildTypes {
         release {
             minifyEnabled false
