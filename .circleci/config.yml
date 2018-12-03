@@ -16,7 +16,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
       - run:
           name: Run Build
-          command: export TERM=${TERM:-dumb} && ./gradlew build --recompile-scripts --refresh-dependencies --parallel --stacktrace
+          command: export TERM=${TERM:-dumb} && ./gradlew clean build --recompile-scripts --refresh-dependencies --parallel --stacktrace
       - store_artifacts:
           path: app/build/outputs/apk/debug/*.apk
           destination: artifact-file
